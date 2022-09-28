@@ -1,0 +1,54 @@
+<div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
+       
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-lime-700">{{conversation.uniqueName}}</h5>
+    
+    <p class="mb-3 font-normal text-gray-700">Created by: {{conversation.createdBy}}</p>
+    <div *ngIf="participants.length > 0" class="text-center">
+        <img *ngFor="let participant of participants" class="inline-flex border-amber-500 border-2 rounded-full -ml-2" src="https://github.com/{{participant?.identity}}.png?size=40" [alt]="participant?.identity">
+    </div>
+    <div class="text-center">
+        <button (click)="gotoConversation(conversation)" class="w-32 text-black bg-amber-300 rounded-lg hover:bg-amber-200 focus:ring-4 focus:outline-none m-1 mx-2 p-2">
+            Enter
+        </button>
+        <button *ngIf="conversation.createdBy === user" (click)="toggleModal()" 
+                class=  "w-32 text-white bg-red-500 rounded-lg hover:bg-red-200 focus:ring-4 focus:outline-none m-1 mx-2 p-2">
+            Delete
+        </button>
+    </div>
+</div>
+
+
+<div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+        <!--content-->
+        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+            <h3 class="text-3xl text-lime-500">
+            Delete Conversation
+            </h3>
+            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleModal()">
+            <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                ×
+            </span>
+            </button>
+        </div>
+        <!--body-->
+        <div class="relative p-6 flex-auto">
+            <p class="my-4 text-slate-500 text-lg leading-relaxed">
+            Are you sure you want to delete this conversation? This action cannot be undone.
+            </p>
+        </div>
+        <!--footer-->
+        <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+            <button class="bg-lime-500 text-white text-sm px-6 py-3 rounded shadow mx-2" type="button" (click)="toggleModal()">
+                Close
+            </button>
+            <button class="bg-red-500 text-white px-6 py-3 text-sm rounded shadow mx-2" type="button" (click)="deleteConversation(conversation)">
+                Delete
+            </button>
+        </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>`

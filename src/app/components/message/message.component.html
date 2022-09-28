@@ -1,0 +1,19 @@
+<div class="border-2 max-w-xs clear-both drop-shadow-md p-2 m-3 rounded-lg"
+    [ngClass]="message.author===user ? 
+                'float-right border-amber-500 bg-amber-200 text-right' : 
+                'float-left border-lime-500 bg-lime-200 text-left' " >
+    <div *ngIf="lastMessageAuthor === '' || lastMessageAuthor !== message.author"  class="message-header flex place-items-center">
+        <img    class="rounded-full mr-2 -mt-6"
+                [ngClass]="message.author===user ? 
+                'border-amber-500 border-2' : 
+                'border-lime-500 border-2' "
+                src="https://github.com/{{message.author}}.png?size=40" 
+                [alt]="message.author">
+        <span class="text-lime-700">{{message.author}}</span>   
+    </div>
+    <div class="message-body">
+        <p>{{message.body}}</p>
+    </div>
+    <button (click)="speak()" class="border-2 border-lime-900 w-16 rounded text-xs">Play ⏯️</button>
+    <span class="text-xs ml-2">{{message.dateCreated | date:'YY/MM/dd H:mm'}}</span>
+</div>
