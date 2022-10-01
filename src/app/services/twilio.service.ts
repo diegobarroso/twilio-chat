@@ -11,8 +11,8 @@ export class TwilioService {
   constructor(private http: HttpClient) {}
 
   getAccessToken(token: string, action: string): Observable<{token:string}> {
-    //return this.http.get<{token:string}>('http://localhost:4000/auth/token', {headers: { token, action }});
-    return this.http.get<{token:string}>('https://chat-server-tbcf.onrender.com/auth/token', {headers: { token, action }})
+    return this.http.get<{token:string}>('http://localhost:4000/auth/token', {headers: { token, action }});
+    //return this.http.get<{token:string}>('https://chat-server-tbcf.onrender.com/auth/token', {headers: { token, action }})
   }
   
   // get user conversations

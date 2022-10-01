@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   user!: User;
   session!: Session | null;
   errorMessage!: string | null;
+  loading = false;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -32,24 +33,27 @@ export class HomeComponent implements OnInit {
         this.twilioService.getAccessToken(this.session!.access_token!, 'login')
         .subscribe(({token}) => {
           if (token) {
-              this.setCurrentUser();
-              this.user.token = token;
-              this.store.setCurrentUser(this.user);
-              this.authService.signOut();
-              this.router.navigate(['/chat']);
-            } else this.errorMessage = 'Can not login. Try again later.';      
-          });
+            this.setCurrentUser();
+            this.user.token = token;
+            this.store.setCurrentUser(this.user);
+            this.authService.signOut();
+            this.router.navigate(['/chat']);
+          } else this.errorMessage = 'Can not login. Try again later.';      
+        });
       }
       });
   }
  
   async login() {
+    this.loading = true;
     try {
       await this.authService.signInWithGithub();    
     } catch (error) {
       this.errorMessage = 'Can not login. Try again later.';
+    } finally {
+      this.loading = false
     }
-  }
+  } 
 
 
   private setCurrentUser() {
