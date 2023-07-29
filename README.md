@@ -6,6 +6,8 @@ Welcome to the TwilioChat
 
 [Backend](https://github.com/diegobarroso/chat-server)
 
+[Open Bootcamp mini hackathon Youtube](https://youtu.be/cnULfqtBm-c?t=6191)
+
 This project was generated using: 
 - Angular 14
 - Supabase Authentication
